@@ -25,7 +25,7 @@ public class Team {
     private String logo;
 
     @OneToMany(mappedBy = "team")
-    @JsonManagedReference //ovaj se serijalizuje, prednji deo reference
+    @JsonManagedReference
     private List<Player> listOfPlayers;
 
     @OneToOne

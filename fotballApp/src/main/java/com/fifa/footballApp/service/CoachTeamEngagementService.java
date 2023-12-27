@@ -16,8 +16,12 @@ public class CoachTeamEngagementService {
         this.engagementRepo = engagementRepo;
     }
 
+    public List<CoachTeamEngagement> getAllCoaches() {
+        return engagementRepo.findAll();
+    }
+
     public List<CoachTeamEngagement> getActiveCoaches() {
-        return engagementRepo.findAll().stream().filter(CoachTeamEngagement::isActive).collect(Collectors.toList());
+        return engagementRepo.findByIsActiveTrue();
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CoachTeamEngagementRepo extends JpaRepository<CoachTeamEngagement, Long> {
 
-//    Ovde bih morao da koristim @Query anotaciju sa sql upitima, npr:
+//    Ovde bih mogao da koristim @Query anotaciju sa sql upitima, npr:
 
 //    @Query("select nesto from CoachTeamEngagement where nesto.isActive = true")
 //    List<CoachTeamEngagement> findActiveCoach();

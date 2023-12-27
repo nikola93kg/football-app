@@ -18,6 +18,11 @@ public class CoachTeamEngagementController {
         this.service = service;
     }
 
+    @GetMapping
+    public List<CoachTeamEngagement> getAllCoaches() {
+        return service.getAllCoaches();
+    }
+
     @GetMapping("/active")
     public List<CoachTeamEngagement> getActiveCoaches() {
         return service.getActiveCoaches();
