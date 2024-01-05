@@ -32,6 +32,10 @@ public class MatchEvent {
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
+    @ManyToOne
+    @JoinColumn(name = "referee_id", nullable = false)
+    private Referee referee;
+
     @Enumerated(EnumType.STRING)
     private MatchEventType eventType;
 
