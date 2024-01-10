@@ -41,7 +41,8 @@ public class RefereeService {
         referee.setName(refereeDetails.getName());
         referee.setNationality(refereeDetails.getNationality());
         referee.setAge(refereeDetails.getAge());
-
+//        referee.setTotalRedCardsGiven(refereeDetails.getTotalRedCardsGiven());
+//        referee.setTotalYellowCardsGiven(refereeDetails.getTotalYellowCardsGiven());
         return refereeRepo.save(referee);
     }
 
@@ -52,6 +53,7 @@ public class RefereeService {
 
     public List<Referee> searchReferees(String nationality, String name, Integer age) {
         return null; // ovo mozda u RefereeRepo da pises custom sql? Query
+//        return refereeRepo.findByQuery(nationality, name, age);
     }
 
     public Map<String, Long> getRefereeStatistics(Long refereeId) {

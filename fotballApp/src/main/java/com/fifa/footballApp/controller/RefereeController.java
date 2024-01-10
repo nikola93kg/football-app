@@ -5,7 +5,10 @@ import com.fifa.footballApp.service.RefereeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/v1/referees")
@@ -51,7 +54,12 @@ public class RefereeController {
 
     @GetMapping("/{id}/statistics")
     public ResponseEntity<?> getRefereeStatistics(@PathVariable Long id) {
-        return null;
+        Map<String, Long> statistics = refereeService.getRefereeStatistics(id);
+        // mozda prvo da se proveri da li je statistics empty
+        if (statistics.isEmpty()) {
+            throw new NoSuchElementException("Nema statistike za sudiju");
+        }
+        return ResponseEntity.ok(statistics);
     }
 
 }

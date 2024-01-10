@@ -1,2 +1,3 @@
-INSERT INTO team (id, name, logo) VALUES (1, 'Arsenal', 'https://upload.wikimedia.org/wikipedia/sr/8/82/Arsenal_FC.png');
-INSERT INTO player (id, name, default_position, age, nationality, jersey_number, team_id) VALUES (1, 'Gabriel Jesus', 'Forward', 24, 'Brazil', 9, 1);
+--INSERT INTO team (id, name, logo) VALUES (1, 'Arsenal', 'https://upload.wikimedia.org/wikipedia/sr/8/82/Arsenal_FC.png');
+--INSERT INTO player (id, name, default_position, age, nationality, jersey_number, team_id) VALUES (1, 'Gabriel Jesus', 'Forward', 24, 'Brazil', 9, 1);
+--INSERT INTO referee (name, age, nationality, total_red_cards_given, total_yellow_cards_given) VALUES ('Mark Clattenburg', 45, 'England', 5, 120);
