@@ -23,6 +23,7 @@ public class TeamController {
     @GetMapping
     public List<Team> getAllTeams() {
         return teamService.getAllTeams();
+//        kjhkjh
     }
 
     @GetMapping("/{id}")
