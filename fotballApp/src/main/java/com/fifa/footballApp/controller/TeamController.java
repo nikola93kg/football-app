@@ -23,7 +23,6 @@ public class TeamController {
     @GetMapping
     public List<Team> getAllTeams() {
         return teamService.getAllTeams();
-//        kjhkjh
     }
 
     @GetMapping("/{id}")
@@ -78,7 +77,7 @@ public class TeamController {
 
     @PostMapping("/{teamId}/add-player/{playerId}")
     public ResponseEntity<?> addPlayerToTeam(@PathVariable Long teamId, @PathVariable Long playerId) {
-        teamService.addPlayerToTeam(teamId, playerId);
+        teamService.assignPlayerToTeam(teamId, playerId);
         return ResponseEntity.ok().build();
     }
 

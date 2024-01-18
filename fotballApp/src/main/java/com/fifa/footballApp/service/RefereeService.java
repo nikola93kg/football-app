@@ -28,6 +28,9 @@ public class RefereeService {
     }
 
     public Referee addReferee(Referee referee) {
+        if (refereeRepo.findByName(referee.getName()) != null) {
+            throw new IllegalStateException("Referee with the name: " + referee.getName() + "already exists");
+        }
         return refereeRepo.save(referee);
     }
 
@@ -48,6 +51,7 @@ public class RefereeService {
 
 
     public void deleteReferee(Long id) {
+//        odradi check da li tim koji ima taj id postoji
         refereeRepo.deleteById(id);
     }
 

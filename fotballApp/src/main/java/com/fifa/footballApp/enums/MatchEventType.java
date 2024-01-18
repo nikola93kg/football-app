@@ -5,6 +5,7 @@ public enum MatchEventType {
     SHOT_ON_GOAL,
     SHOT_OUT_OF_GOAL,
     TOTAL_SHOTS,
+    ASSIST,
     FREE_KICK,
     CORNER,
     OFFSIDE,

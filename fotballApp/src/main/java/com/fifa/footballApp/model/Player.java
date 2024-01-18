@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -22,10 +24,12 @@ public class Player {
     private long id;
 
     private String name;
-    private String defaultPosition; //string mozes da stavis kao enumeraciju
+    private String defaultPosition;
     private int age;
     private String nationality;
     private int jerseyNumber;
+    private Double transferFee; //wrapper klasa zato sto moze imati null, primitivni tip bi imao 0.0
+    private LocalDateTime transferDate;
 
     @Enumerated(EnumType.STRING) // vrednost enuma treba da bude sacuvana kao string u bazi
     @ElementCollection(targetClass = PlayerPosition.class) // ova anotacija sluzi za modelovanje enuma
@@ -37,5 +41,4 @@ public class Player {
     @JoinColumn(name = "team_id", nullable = false)
     @JsonBackReference
     private Team team;
-
 }

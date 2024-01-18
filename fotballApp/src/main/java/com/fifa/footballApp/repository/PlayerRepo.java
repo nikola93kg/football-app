@@ -8,4 +8,6 @@ import java.util.List;
 public interface PlayerRepo extends JpaRepository<Player, Long> {
 
     List<Player> findByName(String name);
+    List<Player> findByNameContainingAndNationality(String name, String nationality);
+
 }
