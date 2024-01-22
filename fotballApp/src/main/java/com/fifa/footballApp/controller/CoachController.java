@@ -2,9 +2,7 @@ package com.fifa.footballApp.controller;
 
 import com.fifa.footballApp.model.Coach;
 import com.fifa.footballApp.service.CoachService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,31 @@ public class CoachController {
     @GetMapping
     public List<Coach> getAllCoaches() {
         return  coachService.getAllCoaches();
+    }
+
+    @GetMapping("/{id}")
+    public Coach getCoachById(@PathVariable Long id) {
+        return coachService.getCoachById(id);
+    }
+
+    @PostMapping
+    public Coach createCoach(@RequestBody Coach coach) {
+        return coachService.createCoach(coach);
+    }
+
+    @PutMapping("/{id}")
+    public Coach updateCoach(@PathVariable Long id, @RequestBody Coach coachDetails) {
+        return coachService.updateCoach(id, coachDetails);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCoach(@PathVariable Long id) {
+        coachService.deleteCoach(id);
+    }
+
+    @GetMapping("/search")
+    public List<Coach> searchCoaches(String name, String nationality) {
+        return coachService.searchCoaches(name, nationality);
     }
 
 }

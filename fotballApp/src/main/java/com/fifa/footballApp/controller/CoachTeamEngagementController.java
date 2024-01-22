@@ -2,9 +2,7 @@ package com.fifa.footballApp.controller;
 
 import com.fifa.footballApp.model.CoachTeamEngagement;
 import com.fifa.footballApp.service.CoachTeamEngagementService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,19 +10,39 @@ import java.util.List;
 @RequestMapping("api/v1/coach-engagements")
 public class CoachTeamEngagementController {
 
-    private final CoachTeamEngagementService service;
+    private final CoachTeamEngagementService coachTeamEngagementService;
 
-    public CoachTeamEngagementController(CoachTeamEngagementService service) {
-        this.service = service;
+    public CoachTeamEngagementController(CoachTeamEngagementService coachTeamEngagementService) {
+        this.coachTeamEngagementService = coachTeamEngagementService;
     }
 
     @GetMapping
-    public List<CoachTeamEngagement> getAllCoaches() {
-        return service.getAllCoaches();
+    public List<CoachTeamEngagement> getAllEngagements() {
+        return coachTeamEngagementService.getAllEngagements();
+    }
+
+    @GetMapping("/{id}")
+    public CoachTeamEngagement getEngagementById(@PathVariable Long id) {
+        return coachTeamEngagementService.getEngagementById(id);
+    }
+
+    @PostMapping
+    public CoachTeamEngagement createEngagement(@RequestBody CoachTeamEngagement engagement) {
+        return coachTeamEngagementService.createEngagement(engagement);
+    }
+
+    @PutMapping("/{id}")
+    public CoachTeamEngagement updateEngagement(@PathVariable Long id, @RequestBody CoachTeamEngagement engagementDetails) {
+        return coachTeamEngagementService.updateEngagement(id, engagementDetails);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEngagement(@PathVariable Long id) {
+        coachTeamEngagementService.deleteEngagement(id);
     }
 
     @GetMapping("/active")
     public List<CoachTeamEngagement> getActiveCoaches() {
-        return service.getActiveCoaches();
+        return coachTeamEngagementService.getActiveEngagements();
     }
 }

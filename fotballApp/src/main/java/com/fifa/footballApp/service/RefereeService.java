@@ -39,7 +39,7 @@ public class RefereeService {
     }
 
     public Referee updateReferee(Long id, Referee refereeDetails) {
-        Referee referee = refereeRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Referee not found")); //za ovo nisam siguran jel moze ovako
+        Referee referee = refereeRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Referee not found"));
 
         referee.setName(refereeDetails.getName());
         referee.setNationality(refereeDetails.getNationality());
@@ -51,9 +51,19 @@ public class RefereeService {
 
 
     public void deleteReferee(Long id) {
-//        odradi check da li tim koji ima taj id postoji
-        refereeRepo.deleteById(id);
+//        odradi check da li referee koji ima taj id postoji
+        if(refereeRepo.existsById(id)) {
+            refereeRepo.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Referee with id: " + id + "not found");
+        }
     }
+
+//    public void deleteReferee(Long id) {
+//        Referee referee = refereeRepo.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Referee with id: " + id + " not found"));
+//        refereeRepo.delete(referee);
+//    }
 
     public List<Referee> searchReferees(String nationality, String name, Integer age) {
         return null; // ovo mozda u RefereeRepo da pises custom sql? Query

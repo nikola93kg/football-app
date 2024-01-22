@@ -5,6 +5,7 @@ import com.fifa.footballApp.model.MatchEvent;
 import com.fifa.footballApp.model.Referee;
 import com.fifa.footballApp.repository.MatchEventRepo;
 import com.fifa.footballApp.repository.RefereeRepo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +43,28 @@ public class MatchEventService {
             refereeRepo.save(referee);
         }
 
+    }
+
+    public MatchEvent createMatchEvent(MatchEvent matchEvent) {
+        MatchEvent savedEvent = matchEventRepo.save(matchEvent);
+        updateRefereeStatistics(matchEvent);
+        return savedEvent;
+    }
+
+    public List<MatchEvent> searchMatchEvent(Long playerId) {
+        return matchEventRepo.findByPlayerId(playerId);
+    }
+
+    public MatchEvent updateMatchEvent(Long id, MatchEvent matchEventDetails) {
+        MatchEvent event = matchEventRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Match Event not found wit id: " + id));
+
+        event.setEventTime(matchEventDetails.getEventTime());
+
+        return matchEventRepo.save(event);
+    }
+
+    public void deleteMatchEvent(Long id) {
+        matchEventRepo.deleteById(id);
     }
 }

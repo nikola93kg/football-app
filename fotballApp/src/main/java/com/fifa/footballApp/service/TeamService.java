@@ -84,14 +84,14 @@ public class TeamService {
     public List<Match> getPastMatches(Long id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
-        return matchRepo.findByTeamIdAndDateBefore(id, LocalDate.now());
+        return matchRepo.findByIdAndDateBefore(id, LocalDate.now());
     }
 
     public List<Match> getUpcomingMatches(Long id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
 
-        return matchRepo.findByTeamIdAndDateAfter(id, LocalDate.now());
+        return matchRepo.findByIdAndDateAfter(id, LocalDate.now());
     }
 
     public void assignPlayerToTeam(Long teamId, Long playerId) {

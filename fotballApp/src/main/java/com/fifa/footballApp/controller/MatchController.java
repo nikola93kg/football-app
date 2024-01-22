@@ -1,10 +1,9 @@
 package com.fifa.footballApp.controller;
 
 import com.fifa.footballApp.model.Match;
+import com.fifa.footballApp.model.MatchEvent;
 import com.fifa.footballApp.service.MatchService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,35 @@ public class MatchController {
     @GetMapping
     public List<Match> getAllMatches() {
         return matchService.getAllMatches();
+    }
+
+    @GetMapping("/{id}")
+    public Match getMatchById(@PathVariable Long id) {
+        return matchService.getMatchById(id);
+    }
+
+    @PostMapping
+    public Match createMatch(@RequestBody Match match) {
+        return matchService.createMatch(match);
+    }
+
+    @PutMapping("/{id}")
+    public Match updateMatch(@PathVariable Long id, @RequestBody Match matchDetails) {
+        return matchService.updateMatch(id, matchDetails);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteMatch(@PathVariable Long id) {
+        matchService.deleteMatch(id);
+    }
+
+    @GetMapping("/search")
+    public List<Match> searchMatches(String stadium) {
+        return matchService.searchMatches(stadium);
+    }
+
+    @GetMapping("{id}/events")
+    public List<MatchEvent> getMatchEvents(@PathVariable Long id) {
+        return matchService.getMatchEvents(id);
     }
 }

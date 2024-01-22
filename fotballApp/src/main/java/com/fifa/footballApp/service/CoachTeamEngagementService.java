@@ -2,10 +2,10 @@ package com.fifa.footballApp.service;
 
 import com.fifa.footballApp.model.CoachTeamEngagement;
 import com.fifa.footballApp.repository.CoachTeamEngagementRepo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CoachTeamEngagementService {
@@ -16,11 +16,42 @@ public class CoachTeamEngagementService {
         this.engagementRepo = engagementRepo;
     }
 
-    public List<CoachTeamEngagement> getAllCoaches() {
+
+    public List<CoachTeamEngagement> getAllEngagements() {
         return engagementRepo.findAll();
     }
 
-    public List<CoachTeamEngagement> getActiveCoaches() {
+    public CoachTeamEngagement getEngagementById(Long id) {
+        return engagementRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Engagement not found with id: " + id));
+    }
+
+    public CoachTeamEngagement createEngagement(CoachTeamEngagement engagement) {
+        return engagementRepo.save(engagement);
+    }
+
+    public CoachTeamEngagement updateEngagement(Long id, CoachTeamEngagement engagementDetails) {
+        CoachTeamEngagement existingEngagement = engagementRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Engagement not found with id: " + id));
+
+        existingEngagement.setTeam(engagementDetails.getTeam());
+        existingEngagement.setCoach(engagementDetails.getCoach());
+        existingEngagement.setRole(engagementDetails.getRole());
+        existingEngagement.setStartDate(engagementDetails.getStartDate());
+        existingEngagement.setEndDate(engagementDetails.getEndDate());
+        existingEngagement.setActive(engagementDetails.isActive());
+
+        return engagementRepo.save(existingEngagement);
+    }
+
+    public void deleteEngagement(Long id) {
+        if (!engagementRepo.existsById(id)) {
+            throw new EntityNotFoundException("Engagement not found with id: " + id);
+        }
+        engagementRepo.deleteById(id);
+    }
+
+    public List<CoachTeamEngagement> getActiveEngagements() {
         return engagementRepo.findByIsActiveTrue();
     }
 
