@@ -2,6 +2,7 @@ package com.fifa.footballApp.service;
 
 import com.fifa.footballApp.model.Match;
 import com.fifa.footballApp.model.MatchEvent;
+import com.fifa.footballApp.repository.MatchEventRepo;
 import com.fifa.footballApp.repository.MatchRepo;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,10 @@ import java.util.List;
 public class MatchService {
 
     private final MatchRepo matchRepo;
-    public MatchService(MatchRepo matchRepo) {
+    private final MatchEventRepo matchEventRepo;
+    public MatchService(MatchRepo matchRepo, MatchEventRepo matchEventRepo) {
         this.matchRepo = matchRepo;
+        this.matchEventRepo = matchEventRepo;
     }
 
     public List<Match> getAllMatches() {
@@ -61,7 +64,7 @@ public class MatchService {
         if(matchId == null) {
             throw new IllegalArgumentException("Match id can't be null");
         }
-        return matchRepo.findByMatchId(matchId);
+        return matchEventRepo.findByMatchId(matchId);
     }
 
 }

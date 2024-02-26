@@ -11,5 +11,4 @@ public interface MatchRepo extends JpaRepository<Match, Long> {
     List<Match> findByIdAndDateBefore(Long id, LocalDate date);
     List<Match> findByIdAndDateAfter(Long id, LocalDate date);
     List<Match> findByStadiumContaining(String stadium); //Containing ce pretraziti i polovicno podudaranje npr ako kucam old moze da nadje old trafford
-    List<MatchEvent> findByMatchId(Long matchId);
 }

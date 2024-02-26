@@ -11,5 +11,5 @@ public interface MatchEventRepo extends JpaRepository<MatchEvent, Long> {
 
     List<MatchEvent> findByRefereeId(Long refereeId);
     List<MatchEvent> findByPlayerId(Long playerId);
-
+    List<MatchEvent> findByMatchId(Long id);
 }
