@@ -21,7 +21,7 @@ public class CoachTeamEngagementService {
         return engagementRepo.findAll();
     }
 
-    public CoachTeamEngagement getEngagementById(Long id) {
+    public CoachTeamEngagement getEngagementById(String id) {
         return engagementRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Engagement not found with id: " + id));
     }
@@ -30,7 +30,7 @@ public class CoachTeamEngagementService {
         return engagementRepo.save(engagement);
     }
 
-    public CoachTeamEngagement updateEngagement(Long id, CoachTeamEngagement engagementDetails) {
+    public CoachTeamEngagement updateEngagement(String id, CoachTeamEngagement engagementDetails) {
         CoachTeamEngagement existingEngagement = engagementRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Engagement not found with id: " + id));
 
@@ -44,7 +44,7 @@ public class CoachTeamEngagementService {
         return engagementRepo.save(existingEngagement);
     }
 
-    public void deleteEngagement(Long id) {
+    public void deleteEngagement(String id) {
         if (!engagementRepo.existsById(id)) {
             throw new EntityNotFoundException("Engagement not found with id: " + id);
         }

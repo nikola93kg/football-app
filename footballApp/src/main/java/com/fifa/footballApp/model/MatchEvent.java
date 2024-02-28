@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 
@@ -17,8 +18,8 @@ import java.time.LocalDateTime;
 public class MatchEvent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @UuidGenerator
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "match_id", nullable = false)

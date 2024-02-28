@@ -21,7 +21,7 @@ public class CoachService {
         return coachRepo.findAll();
     }
 
-    public Coach getCoachById(Long id) {
+    public Coach getCoachById(String id) {
         return coachRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Coach not found with id: " + id));
     }
@@ -30,7 +30,7 @@ public class CoachService {
         return coachRepo.save(coach);
     }
 
-    public Coach updateCoach(Long id, Coach coachDetails) {
+    public Coach updateCoach(String id, Coach coachDetails) {
         Coach coach = coachRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Coach not found with id: " + id));
 
@@ -42,7 +42,7 @@ public class CoachService {
         return coachRepo.save(coach);
     }
 
-    public void deleteCoach(Long id) {
+    public void deleteCoach(String id) {
         if (!coachRepo.existsById(id)) {
             throw new EntityNotFoundException("Coach not found with id: " + id);
         }

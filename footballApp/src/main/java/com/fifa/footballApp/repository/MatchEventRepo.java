@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MatchEventRepo extends JpaRepository<MatchEvent, Long> {
+public interface MatchEventRepo extends JpaRepository<MatchEvent, String> {
 
-    List<MatchEvent> findByRefereeId(Long refereeId);
-    List<MatchEvent> findByPlayerId(Long playerId);
-    List<MatchEvent> findByMatchId(Long id);
+    List<MatchEvent> findByRefereeId(String refereeId);
+    List<MatchEvent> findByPlayerId(String playerId);
+    List<MatchEvent> findByMatchId(String id);
 }

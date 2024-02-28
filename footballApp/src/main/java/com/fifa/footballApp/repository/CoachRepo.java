@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CoachRepo extends JpaRepository<Coach, Long> {
+public interface CoachRepo extends JpaRepository<Coach, String> {
     List<Coach> findByNameContaining(String name);
     List<Coach> findByNationality(String nationality);
     List<Coach> findByNameContainingAndNationality(String name, String nationality);

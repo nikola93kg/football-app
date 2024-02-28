@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,8 +21,8 @@ import java.util.Set;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @UuidGenerator
+    private String id;
 
     private String name;
     private String defaultPosition;
@@ -37,8 +38,8 @@ public class Player {
     @Column(name = "position") // definise ime kolone u tabeli
     private Set<PlayerPosition> positions;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference
     private Team team;
 }

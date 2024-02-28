@@ -28,7 +28,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}")
-    public Player getPlayerById(@PathVariable Long id) {
+    public Player getPlayerById(@PathVariable String id) {
         return playerService.getPlayerById(id);
     }
 
@@ -38,12 +38,12 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public Player updatePlayer(@PathVariable Long id, @RequestBody Player playerDetails) {
+    public Player updatePlayer(@PathVariable String id, @RequestBody Player playerDetails) {
         return playerService.updatePlayer(id, playerDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePlayer(@PathVariable Long id) {
+    public void deletePlayer(@PathVariable String id) {
         playerService.deletePlayer(id);
     }
 
@@ -54,24 +54,24 @@ public class PlayerController {
 
     @GetMapping("/{id}/statistics")
 //    da li bi ovde trebalo DTO? (PlayerStats)
-    public MatchEvent getPlayerStatistics(@PathVariable Long id) {
+    public MatchEvent getPlayerStatistics(@PathVariable String id) {
         return playerService.getPlayerStatistics(id);
 
     }
 
     @GetMapping("/{id}/stats")
-    public PlayerStats getPlayerStats(@PathVariable Long id) {
+    public PlayerStats getPlayerStats(@PathVariable String id) {
         return playerService.getPlayerStats(id);
     }
 
     @PostMapping("/{id}/transfer")
-    public ResponseEntity<?> transferPlayer(@PathVariable Long id, @RequestParam Long toTeamId, @RequestBody TransferDetails transferDetails ) {
+    public ResponseEntity<?> transferPlayer(@PathVariable String id, @RequestParam String toTeamId, @RequestBody TransferDetails transferDetails ) {
         playerService.transferPlayer(id, toTeamId, transferDetails);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("{id}/matches")
-    public List<Match> getPlayerMatches(@PathVariable Long id) {
+    public List<Match> getPlayerMatches(@PathVariable String id) {
         return playerService.getPlayerMatches(id);
     }
 

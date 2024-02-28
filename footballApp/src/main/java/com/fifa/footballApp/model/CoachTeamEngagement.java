@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 
@@ -17,8 +18,8 @@ import java.time.LocalDate;
 public class CoachTeamEngagement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @UuidGenerator
+    private String id;
 
     @OneToOne //@ManyToOne ako trener moze da promeni tim?
     @JoinColumn(name = "team_id", nullable = false)

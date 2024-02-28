@@ -28,17 +28,17 @@ public class MatchEventController {
     }
 
     @GetMapping("/search")
-    public List<MatchEvent> searchMatchEvent(@RequestParam Long playerId) {
+    public List<MatchEvent> searchMatchEvent(@RequestParam String playerId) {
         return matchEventService.searchMatchEvent(playerId);
     }
 
     @PutMapping("/{id}")
-    public MatchEvent updateMatchEvent(@PathVariable Long id, @RequestBody MatchEvent matchEventDetails) {
+    public MatchEvent updateMatchEvent(@PathVariable String id, @RequestBody MatchEvent matchEventDetails) {
         return matchEventService.updateMatchEvent(id, matchEventDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMatchEvent(@PathVariable Long id) {
+    public void deleteMatchEvent(@PathVariable String id) {
         matchEventService.deleteMatchEvent(id);
     }
 }

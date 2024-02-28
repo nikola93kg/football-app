@@ -33,17 +33,17 @@ public class RefereeController {
 //    da dohvatim sudiju po id-u
 
     @GetMapping("/{id}")
-    public Referee getRefereeById(@PathVariable Long id) {
+    public Referee getRefereeById(@PathVariable String id) {
         return refereeService.getRefereeById(id);
     }
 
     @PutMapping("/{id}")
-    public Referee updateReferee(@PathVariable Long id, @RequestBody Referee refereeDetails) {
+    public Referee updateReferee(@PathVariable String id, @RequestBody Referee refereeDetails) {
         return refereeService.updateReferee(id, refereeDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReferee(@PathVariable Long id) {
+    public void deleteReferee(@PathVariable String id) {
         refereeService.deleteReferee(id);
     }
 
@@ -53,7 +53,7 @@ public class RefereeController {
     }
 
     @GetMapping("/{id}/statistics")
-    public ResponseEntity<?> getRefereeStatistics(@PathVariable Long id) {
+    public ResponseEntity<?> getRefereeStatistics(@PathVariable String id) {
         Map<String, Long> statistics = refereeService.getRefereeStatistics(id);
         // mozda prvo da se proveri da li je statistics empty
         if (statistics.isEmpty()) {

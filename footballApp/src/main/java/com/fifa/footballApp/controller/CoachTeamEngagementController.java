@@ -22,7 +22,7 @@ public class CoachTeamEngagementController {
     }
 
     @GetMapping("/{id}")
-    public CoachTeamEngagement getEngagementById(@PathVariable Long id) {
+    public CoachTeamEngagement getEngagementById(@PathVariable String id) {
         return coachTeamEngagementService.getEngagementById(id);
     }
 
@@ -32,12 +32,12 @@ public class CoachTeamEngagementController {
     }
 
     @PutMapping("/{id}")
-    public CoachTeamEngagement updateEngagement(@PathVariable Long id, @RequestBody CoachTeamEngagement engagementDetails) {
+    public CoachTeamEngagement updateEngagement(@PathVariable String id, @RequestBody CoachTeamEngagement engagementDetails) {
         return coachTeamEngagementService.updateEngagement(id, engagementDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEngagement(@PathVariable Long id) {
+    public void deleteEngagement(@PathVariable String id) {
         coachTeamEngagementService.deleteEngagement(id);
     }
 

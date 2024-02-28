@@ -23,7 +23,7 @@ public class MatchController {
     }
 
     @GetMapping("/{id}")
-    public Match getMatchById(@PathVariable Long id) {
+    public Match getMatchById(@PathVariable String id) {
         return matchService.getMatchById(id);
     }
 
@@ -33,12 +33,12 @@ public class MatchController {
     }
 
     @PutMapping("/{id}")
-    public Match updateMatch(@PathVariable Long id, @RequestBody Match matchDetails) {
+    public Match updateMatch(@PathVariable String id, @RequestBody Match matchDetails) {
         return matchService.updateMatch(id, matchDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMatch(@PathVariable Long id) {
+    public void deleteMatch(@PathVariable String id) {
         matchService.deleteMatch(id);
     }
 
@@ -48,7 +48,7 @@ public class MatchController {
     }
 
     @GetMapping("{id}/events")
-    public List<MatchEvent> getMatchEvents(@PathVariable Long id) {
+    public List<MatchEvent> getMatchEvents(@PathVariable String id) {
         return matchService.getMatchEvents(id);
     }
 }
