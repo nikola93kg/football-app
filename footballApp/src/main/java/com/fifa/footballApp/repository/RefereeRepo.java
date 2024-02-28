@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface RefereeRepo extends JpaRepository<Referee, Long> {
+public interface RefereeRepo extends JpaRepository<Referee, String> {
 
     List<Referee> findByNationality(String nationality); //probaj i sa getBy ili findAllByNationality
     List<Referee> findByName(String name);

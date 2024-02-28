@@ -1,18 +1,20 @@
 package com.fifa.footballApp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Entity
@@ -22,11 +24,9 @@ import java.util.UUID;
 public class Competition {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID"
-    )
-    private UUID id;
+    @UuidGenerator
+    @Column(name="competition_id",insertable=false, updatable=false)
+    private String competitionId;
 
     @Nonnull
     private String name;
@@ -41,7 +41,6 @@ public class Competition {
     private String description;
 
     @Nullable
-    @JsonBackReference
     @ManyToMany(mappedBy = "competitions", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Set<Team> participants = new HashSet<>();
+    private Set<Team> participants;
 }

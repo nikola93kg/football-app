@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TeamRepo extends JpaRepository<Team, Long> {
+public interface TeamRepo extends JpaRepository<Team, String> {
 
     List<Team> findByName(String name);
 

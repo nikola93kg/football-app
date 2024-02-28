@@ -51,11 +51,11 @@ public class MatchEventService {
         return savedEvent;
     }
 
-    public List<MatchEvent> searchMatchEvent(Long playerId) {
+    public List<MatchEvent> searchMatchEvent(String playerId) {
         return matchEventRepo.findByPlayerId(playerId);
     }
 
-    public MatchEvent updateMatchEvent(Long id, MatchEvent matchEventDetails) {
+    public MatchEvent updateMatchEvent(String id, MatchEvent matchEventDetails) {
         MatchEvent event = matchEventRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Match Event not found wit id: " + id));
 
@@ -64,7 +64,7 @@ public class MatchEventService {
         return matchEventRepo.save(event);
     }
 
-    public void deleteMatchEvent(Long id) {
+    public void deleteMatchEvent(String id) {
         matchEventRepo.deleteById(id);
     }
 }

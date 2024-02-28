@@ -1,5 +1,6 @@
 package com.fifa.footballApp.service;
 
+import com.fifa.footballApp.exception.TeamNotFoundException;
 import com.fifa.footballApp.model.Coach;
 import com.fifa.footballApp.model.Match;
 import com.fifa.footballApp.model.Player;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TeamService {
@@ -38,7 +40,7 @@ public class TeamService {
         return teamRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    public Team getTeamById(Long id) {
+    public Team getTeamById(String id) {
         return teamRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("Team not found"));
     }
 
@@ -50,7 +52,7 @@ public class TeamService {
     }
 
 
-    public Team updateTeam(Long id, Team teamDetails) {
+    public Team updateTeam(String id, Team teamDetails) {
         Team teamToUpdate = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id of: " + id));
         teamToUpdate.setName(teamDetails.getName());
@@ -61,9 +63,9 @@ public class TeamService {
         return teamRepo.save(teamToUpdate);
     }
 
-    public void deleteTeam(Long id) {
-        if(!teamRepo.findById(id).isPresent()) {
-            throw new EntityNotFoundException("Team not found with id: " + id);
+    public void deleteTeam(String id) {
+        if(teamRepo.findById(id).isEmpty()) {
+            throw new TeamNotFoundException("Team with id '" + id + "' not found.");
         }
         teamRepo.deleteById(id);
     }
@@ -72,34 +74,34 @@ public class TeamService {
         return teamRepo.findByName(name);
     }
 
-    public List<Player> getPlayersOfTheTeam(Long id) {
+    public List<Player> getPlayersOfTheTeam(String id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
 
         return team.getListOfPlayers();
     }
 
-    public Coach getTeamCoach(Long id) {
+    public Coach getTeamCoach(String id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found wtih id: " + id));
 
         return team.getCoach();
     }
 
-    public List<Match> getPastMatches(Long id) {
+    public List<Match> getPastMatches(String id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
         return matchRepo.findByIdAndDateBefore(id, LocalDate.now());
     }
 
-    public List<Match> getUpcomingMatches(Long id) {
+    public List<Match> getUpcomingMatches(String id) {
         Team team = teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
 
         return matchRepo.findByIdAndDateAfter(id, LocalDate.now());
     }
 
-    public void assignPlayerToTeam(Long teamId, Long playerId) {
+    public void assignPlayerToTeam(String teamId, String playerId) {
         Team team = teamRepo.findById(teamId)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + teamId));
 
@@ -110,7 +112,7 @@ public class TeamService {
         playerRepo.save(player);
     }
 
-    public void removePlayerFromTeam(Long teamId, Long playerId) {
+    public void removePlayerFromTeam(String teamId, String playerId) {
         Player player = playerRepo.findById(playerId)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + playerId));
 
@@ -119,7 +121,7 @@ public class TeamService {
         playerRepo.save(player);
     }
 
-    public void assignCoachToTeam(Long teamId, Long coachId) {
+    public void assignCoachToTeam(String teamId, String coachId) {
         Team team = teamRepo.findById(teamId)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + teamId));
 
@@ -130,7 +132,7 @@ public class TeamService {
         teamRepo.save(team);
     }
 
-    public void removeCoachFromTeam(Long teamId, Long coachId) {
+    public void removeCoachFromTeam(String teamId, String coachId) {
         Team team = teamRepo.findById(teamId)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + teamId));
 

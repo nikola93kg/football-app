@@ -33,7 +33,7 @@ public class PlayerService {
         return playerRepo.findAll();
     }
 
-    public Player getPlayerById(Long id) {
+    public Player getPlayerById(String id) {
         return playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + id));
     }
@@ -42,7 +42,7 @@ public class PlayerService {
         return playerRepo.save(player);
     }
 
-    public Player updatePlayer(Long id, Player playerDetails) {
+    public Player updatePlayer(String id, Player playerDetails) {
         Player player = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + id));
 
@@ -55,7 +55,7 @@ public class PlayerService {
         return playerRepo.save(player);
     }
 
-    public void deletePlayer(Long id) {
+    public void deletePlayer(String id) {
         if (!playerRepo.existsById(id)) {
             throw new EntityNotFoundException("Player not found with id: " + id);
         }
@@ -66,11 +66,11 @@ public class PlayerService {
         return playerRepo.findByNameContainingAndNationality(name, nationality);
     }
 
-    public MatchEvent getPlayerStatistics(Long id) {
+    public MatchEvent getPlayerStatistics(String id) {
         return null;
     }
 
-    public PlayerStats getPlayerStats(Long playerId) {
+    public PlayerStats getPlayerStats(String playerId) {
         List<MatchEvent> playerEvents = matchEventRepo.findByPlayerId(playerId);
 
 //        mozda ovde da prodjem kroz neku petlju (switch npr)
@@ -93,7 +93,7 @@ public class PlayerService {
         return stats;
     }
 
-    public void transferPlayer(Long playerId, Long toTeamId, TransferDetails transferDetails) {
+    public void transferPlayer(String playerId, String toTeamId, TransferDetails transferDetails) {
         Player player = playerRepo.findById(playerId)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + playerId));
         Team newTeam = teamRepo.findById(toTeamId)
@@ -105,7 +105,7 @@ public class PlayerService {
         playerRepo.save(player);
     }
 
-    public List<Match> getPlayerMatches(Long playerId) {
+    public List<Match> getPlayerMatches(String playerId) {
         // proveri da li igrac postoji
 
         List<MatchEvent> events = matchEventRepo.findByPlayerId(playerId);

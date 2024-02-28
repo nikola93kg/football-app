@@ -23,7 +23,7 @@ public class MatchService {
         return matchRepo.findAll();
     }
 
-    public Match getMatchById(Long id) {
+    public Match getMatchById(String id) {
         return matchRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Match not found with id " + id));
     }
@@ -32,7 +32,7 @@ public class MatchService {
         return matchRepo.save(match);
     }
 
-    public Match updateMatch(Long id, Match matchDetails) {
+    public Match updateMatch(String id, Match matchDetails) {
         Match match = matchRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Match not foudn with id " + id));
 
@@ -44,7 +44,7 @@ public class MatchService {
         return matchRepo.save(match);
     }
 
-    public void deleteMatch(Long id) {
+    public void deleteMatch(String id) {
 //    odradi prvo check pa onda delete
         if(matchRepo.existsById(id)) {
             matchRepo.deleteById(id);
@@ -60,7 +60,7 @@ public class MatchService {
         return matchRepo.findByStadiumContaining(stadium);
     }
 
-    public List<MatchEvent> getMatchEvents(Long matchId) {
+    public List<MatchEvent> getMatchEvents(String matchId) {
         if(matchId == null) {
             throw new IllegalArgumentException("Match id can't be null");
         }

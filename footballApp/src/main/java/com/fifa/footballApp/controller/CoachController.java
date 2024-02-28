@@ -22,7 +22,7 @@ public class CoachController {
     }
 
     @GetMapping("/{id}")
-    public Coach getCoachById(@PathVariable Long id) {
+    public Coach getCoachById(@PathVariable String id) {
         return coachService.getCoachById(id);
     }
 
@@ -32,12 +32,12 @@ public class CoachController {
     }
 
     @PutMapping("/{id}")
-    public Coach updateCoach(@PathVariable Long id, @RequestBody Coach coachDetails) {
+    public Coach updateCoach(@PathVariable String id, @RequestBody Coach coachDetails) {
         return coachService.updateCoach(id, coachDetails);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCoach(@PathVariable Long id) {
+    public void deleteCoach(@PathVariable String id) {
         coachService.deleteCoach(id);
     }
 

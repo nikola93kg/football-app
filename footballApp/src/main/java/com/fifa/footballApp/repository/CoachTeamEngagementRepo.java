@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CoachTeamEngagementRepo extends JpaRepository<CoachTeamEngagement, Long> {
+public interface CoachTeamEngagementRepo extends JpaRepository<CoachTeamEngagement, String> {
 
 //    Ovde bih mogao da koristim @Query anotaciju sa sql upitima, npr:
 

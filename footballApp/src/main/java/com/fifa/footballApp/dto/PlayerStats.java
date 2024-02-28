@@ -11,19 +11,19 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlayerStats {
 
-    private long totalGoals;
-    private long totalAssists;
-    private long totalMatches;
-    private long totalShotsOnGoal;
-    private long totalShotsOutOfGoal;
-    private long totalShots;
-    private long totalFreeKicks;
-    private long totalOffsides;
-    private long missedPenalties;
-    private long goalsFromPenalty;
-    private long totalYellowCards;
-    private long totalRedCards;
-    private long subIns;
-    private long subOuts;
+    private Long totalGoals;
+    private Long totalAssists;
+    private Long totalMatches;
+    private Long totalShotsOnGoal;
+    private Long totalShotsOutOfGoal;
+    private Long totalShots;
+    private Long totalFreeKicks;
+    private Long totalOffsides;
+    private Long missedPenalties;
+    private Long goalsFromPenalty;
+    private Long totalYellowCards;
+    private Long totalRedCards;
+    private Long subIns;
+    private Long subOuts;
 
 }

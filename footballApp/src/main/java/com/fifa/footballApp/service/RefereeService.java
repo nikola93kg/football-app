@@ -34,11 +34,11 @@ public class RefereeService {
         return refereeRepo.save(referee);
     }
 
-    public Referee getRefereeById(Long id) {
+    public Referee getRefereeById(String id) {
         return refereeRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("Referee not found"));
     }
 
-    public Referee updateReferee(Long id, Referee refereeDetails) {
+    public Referee updateReferee(String id, Referee refereeDetails) {
         Referee referee = refereeRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Referee not found"));
 
         referee.setName(refereeDetails.getName());
@@ -50,7 +50,7 @@ public class RefereeService {
     }
 
 
-    public void deleteReferee(Long id) {
+    public void deleteReferee(String id) {
 //        odradi check da li referee koji ima taj id postoji
         if(refereeRepo.existsById(id)) {
             refereeRepo.deleteById(id);
@@ -59,7 +59,7 @@ public class RefereeService {
         }
     }
 
-//    public void deleteReferee(Long id) {
+//    public void deleteReferee(String id) {
 //        Referee referee = refereeRepo.findById(id)
 //                .orElseThrow(() -> new EntityNotFoundException("Referee with id: " + id + " not found"));
 //        refereeRepo.delete(referee);
@@ -70,7 +70,7 @@ public class RefereeService {
 //        return refereeRepo.findByQuery(nationality, name, age);
     }
 
-    public Map<String, Long> getRefereeStatistics(Long refereeId) {
+    public Map<String, Long> getRefereeStatistics(String refereeId) {
 
         List<MatchEvent> events = matchEventRepo.findByRefereeId(refereeId);
         long totalMatches = events.stream().map(MatchEvent::getMatch).distinct().count();
