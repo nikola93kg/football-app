@@ -18,11 +18,15 @@ import java.util.List;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
     private String logo;
+
+//  liga
+    // drzava
+    // takmicenja
 
     @OneToMany(mappedBy = "team")
     @JsonManagedReference

@@ -9,6 +9,7 @@ import com.fifa.footballApp.repository.MatchRepo;
 import com.fifa.footballApp.repository.PlayerRepo;
 import com.fifa.footballApp.repository.TeamRepo;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -29,8 +30,12 @@ public class TeamService {
         this.coachRepo = coachRepo;
     }
 
+//    public List<Team> getAllTeams() {
+//        return teamRepo.findAll();
+//    }
+
     public List<Team> getAllTeams() {
-        return teamRepo.findAll();
+        return teamRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Team getTeamById(Long id) {
@@ -38,7 +43,7 @@ public class TeamService {
     }
 
     public Team addTeam(Team team) {
-        if (teamRepo.findByName(team.getName()) != null) {
+        if (!teamRepo.findByName(team.getName()).isEmpty()) {
             throw new IllegalStateException("Team with name: " + team.getName() + " already exists");
         }
         return teamRepo.save(team);
