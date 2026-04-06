@@ -1,10 +1,8 @@
 server:
   port: 8082
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/football_app
-    username: postgres
-    password: nikola
+  profiles:
+    default: local
   jpa:
     hibernate:
       ddl-auto: create-drop
