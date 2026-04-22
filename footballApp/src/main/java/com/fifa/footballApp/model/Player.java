@@ -39,7 +39,7 @@ public class Player {
     private Set<PlayerPosition> positions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
     @JsonBackReference
     private Team team;
 }

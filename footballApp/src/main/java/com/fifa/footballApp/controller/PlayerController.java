@@ -3,9 +3,7 @@ package com.fifa.footballApp.controller;
 import com.fifa.footballApp.dto.PlayerStats;
 import com.fifa.footballApp.dto.TransferDetails;
 import com.fifa.footballApp.model.Match;
-import com.fifa.footballApp.model.MatchEvent;
 import com.fifa.footballApp.model.Player;
-import com.fifa.footballApp.repository.PlayerRepo;
 import com.fifa.footballApp.service.PlayerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,8 +51,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}/statistics")
-//    da li bi ovde trebalo DTO? (PlayerStats)
-    public MatchEvent getPlayerStatistics(@PathVariable String id) {
+    public PlayerStats getPlayerStatistics(@PathVariable String id) {
         return playerService.getPlayerStatistics(id);
 
     }

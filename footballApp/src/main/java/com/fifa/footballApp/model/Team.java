@@ -58,7 +58,7 @@ public class Team {
     @Nullable
     private Coach coach; //lista coach-a
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Nullable
     private TeamFormation defaultFormation;
 

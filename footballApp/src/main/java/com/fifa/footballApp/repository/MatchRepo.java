@@ -10,5 +10,7 @@ import java.util.List;
 public interface MatchRepo extends JpaRepository<Match, String> {
     List<Match> findByIdAndDateBefore(String id, LocalDate date);
     List<Match> findByIdAndDateAfter(String id, LocalDate date);
+    List<Match> findByDateBeforeAndHomeTeamIdOrDateBeforeAndAwayTeamId(LocalDate homeDate, String homeTeamId, LocalDate awayDate, String awayTeamId);
+    List<Match> findByDateAfterAndHomeTeamIdOrDateAfterAndAwayTeamId(LocalDate homeDate, String homeTeamId, LocalDate awayDate, String awayTeamId);
     List<Match> findByStadiumContaining(String stadium); //Containing ce pretraziti i polovicno podudaranje npr ako kucam old moze da nadje old trafford
 }

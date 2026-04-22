@@ -66,8 +66,7 @@ public class RefereeService {
 //    }
 
     public List<Referee> searchReferees(String nationality, String name, Integer age) {
-        return null; // ovo mozda u RefereeRepo da pises custom sql? Query
-//        return refereeRepo.findByQuery(nationality, name, age);
+        return refereeRepo.findByQuery(nationality, name, age);
     }
 
     public Map<String, Long> getRefereeStatistics(String refereeId) {

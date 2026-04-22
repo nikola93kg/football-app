@@ -66,16 +66,20 @@ public class PlayerService {
         return playerRepo.findByNameContainingAndNationality(name, nationality);
     }
 
-    public MatchEvent getPlayerStatistics(String id) {
-        return null;
+    public PlayerStats getPlayerStatistics(String id) {
+        return getPlayerStats(id);
     }
 
     public PlayerStats getPlayerStats(String playerId) {
+        playerRepo.findById(playerId)
+                .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + playerId));
+
         List<MatchEvent> playerEvents = matchEventRepo.findByPlayerId(playerId);
 
 //        mozda ovde da prodjem kroz neku petlju (switch npr)
 
         PlayerStats stats = new PlayerStats();
+        stats.setTotalMatches(playerEvents.stream().map(MatchEvent::getMatch).distinct().count());
         stats.setTotalGoals(playerEvents.stream().filter(e -> e.getEventType() == MatchEventType.GOAL).count());
         stats.setTotalAssists(playerEvents.stream().filter(e -> e.getEventType() == MatchEventType.ASSIST).count());
         stats.setTotalShotsOnGoal(playerEvents.stream().filter(e -> e.getEventType() == MatchEventType.SHOT_ON_GOAL).count());

@@ -1,5 +1,6 @@
 package com.fifa.footballApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
@@ -41,6 +42,7 @@ public class Competition {
     private String description;
 
     @Nullable
+    @JsonIgnore
     @ManyToMany(mappedBy = "competitions", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Team> participants;
 }

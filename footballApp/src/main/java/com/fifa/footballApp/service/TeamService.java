@@ -89,16 +89,18 @@ public class TeamService {
     }
 
     public List<Match> getPastMatches(String id) {
-        Team team = teamRepo.findById(id)
+        teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
-        return matchRepo.findByIdAndDateBefore(id, LocalDate.now());
+        LocalDate today = LocalDate.now();
+        return matchRepo.findByDateBeforeAndHomeTeamIdOrDateBeforeAndAwayTeamId(today, id, today, id);
     }
 
     public List<Match> getUpcomingMatches(String id) {
-        Team team = teamRepo.findById(id)
+        teamRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + id));
 
-        return matchRepo.findByIdAndDateAfter(id, LocalDate.now());
+        LocalDate today = LocalDate.now();
+        return matchRepo.findByDateAfterAndHomeTeamIdOrDateAfterAndAwayTeamId(today, id, today, id);
     }
 
     public void assignPlayerToTeam(String teamId, String playerId) {
@@ -116,7 +118,10 @@ public class TeamService {
         Player player = playerRepo.findById(playerId)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + playerId));
 
-//        mozda da uradim neku proveru kog igraca brisem (da li igrac pripada tom timu)
+        if (player.getTeam() == null || !player.getTeam().getId().equals(teamId)) {
+            throw new IllegalStateException("Player with id: " + playerId + " does not belong to team with id: " + teamId);
+        }
+
         player.setTeam(null);
         playerRepo.save(player);
     }
@@ -135,6 +140,10 @@ public class TeamService {
     public void removeCoachFromTeam(String teamId, String coachId) {
         Team team = teamRepo.findById(teamId)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found with id: " + teamId));
+
+        if (team.getCoach() == null || !team.getCoach().getId().equals(coachId)) {
+            throw new IllegalStateException("Coach with id: " + coachId + " is not assigned to team with id: " + teamId);
+        }
 
         team.setCoach(null);
         teamRepo.save(team);

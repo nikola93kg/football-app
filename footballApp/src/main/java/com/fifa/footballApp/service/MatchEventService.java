@@ -36,7 +36,7 @@ public class MatchEventService {
             Referee referee = matchEvent.getReferee();
 //            mozda ovo sve da stavim u if referee != null?
             if (matchEvent.getEventType() == MatchEventType.YELLOW_CARD) {
-                referee.setTotalYellowCardsGiven(referee.getTotalRedCardsGiven() + 1);
+                referee.setTotalYellowCardsGiven(referee.getTotalYellowCardsGiven() + 1);
             } else {
                 referee.setTotalRedCardsGiven(referee.getTotalRedCardsGiven() + 1);
             }
