@@ -40,6 +40,18 @@ public class MatchService {
         match.setTime(matchDetails.getTime());
         match.setLocation(matchDetails.getLocation());
         match.setStadium(matchDetails.getStadium());
+        match.setScore(matchDetails.getScore());
+        match.setHomeScore(matchDetails.getHomeScore());
+        match.setAwayScore(matchDetails.getAwayScore());
+        match.setRoundNumber(matchDetails.getRoundNumber());
+        match.setCurrentMinute(matchDetails.getCurrentMinute());
+        match.setStatus(matchDetails.getStatus());
+        match.setCompetition(matchDetails.getCompetition());
+        match.setHomeTeam(matchDetails.getHomeTeam());
+        match.setAwayTeam(matchDetails.getAwayTeam());
+        match.setReferee(matchDetails.getReferee());
+        match.setHomeTeamFormation(matchDetails.getHomeTeamFormation());
+        match.setAwayTeamFormation(matchDetails.getAwayTeamFormation());
 
         return matchRepo.save(match);
     }

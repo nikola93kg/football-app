@@ -1,5 +1,6 @@
 package com.fifa.footballApp.model;
 
+import com.fifa.footballApp.enums.MatchStatus;
 import com.fifa.footballApp.enums.TeamFormation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,17 @@ public class Match {
     private String location;
     private String stadium;
     private String score;
+    private Integer homeScore;
+    private Integer awayScore;
+    private Integer roundNumber;
+    private Integer currentMinute;
+
+    @Enumerated(EnumType.STRING)
+    private MatchStatus status = MatchStatus.SCHEDULED;
+
+    @ManyToOne
+    @JoinColumn(name = "competition_id")
+    private Competition competition;
 
     @ManyToOne
     @JoinColumn(name = "home_team_id")
@@ -37,7 +49,7 @@ public class Match {
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "referee_id")
     private Referee referee;
 

@@ -5,10 +5,10 @@ Spring Boot aplikacija za rad sa timovima, igracima, trenerima, sudijama i mecev
 ## Zahtevi
 
 - Docker Desktop
-- Java 17+ dostupna u terminalu
+- Java 26 dostupna u terminalu
 
 Napomena:
-- Projekat je deklarisan za Java 17, ali je lokalno potvrdjen build i sa novijim JDK uz trenutno podeseni `pom.xml`.
+- Projekat je deklarisan za Java 26 i Spring Boot 4.
 
 ## Lokalna konfiguracija
 

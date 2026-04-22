@@ -35,8 +35,9 @@ INSERT INTO player_position (player_id, position) VALUES
 ('player-pedri', 'CENTRAL_MID'),
 ('player-pedri', 'ATTACKING_MID');
 
-INSERT INTO match (id, date, time, location, stadium, score, home_team_id, away_team_id, referee_id, home_team_formation, away_team_formation) VALUES
-('match-ars-bar', '2026-04-10', '20:45:00', 'London', 'Emirates Stadium', '2-1', 'team-arsenal', 'team-barca', 'ref-main', 'FORMATION_4_2_3_1', 'FORMATION_4_3_3');
+INSERT INTO match (id, date, time, location, stadium, score, home_score, away_score, round_number, current_minute, status, competition_id, home_team_id, away_team_id, referee_id, home_team_formation, away_team_formation) VALUES
+('match-ars-bar', '2026-04-10', '20:45:00', 'London', 'Emirates Stadium', '2-1', 2, 1, 1, 90, 'FINISHED', 'comp-ucl', 'team-arsenal', 'team-barca', 'ref-main', 'FORMATION_4_2_3_1', 'FORMATION_4_3_3'),
+('match-bar-ars', '2026-04-24', '20:45:00', 'Barcelona', 'Camp Nou', NULL, NULL, NULL, 2, NULL, 'SCHEDULED', 'comp-ucl', 'team-barca', 'team-arsenal', 'ref-main', 'FORMATION_4_3_3', 'FORMATION_4_2_3_1');
 
 INSERT INTO match_event (id, match_id, player_id, team_id, referee_id, event_type, event_time) VALUES
 ('event-goal-saka', 'match-ars-bar', 'player-saka', 'team-arsenal', 'ref-main', 'GOAL', '2026-04-10 21:05:00'),

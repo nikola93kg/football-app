@@ -1,7 +1,7 @@
 package com.fifa.footballApp.repository;
 
+import com.fifa.footballApp.enums.MatchStatus;
 import com.fifa.footballApp.model.Match;
-import com.fifa.footballApp.model.MatchEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
@@ -13,4 +13,6 @@ public interface MatchRepo extends JpaRepository<Match, String> {
     List<Match> findByDateBeforeAndHomeTeamIdOrDateBeforeAndAwayTeamId(LocalDate homeDate, String homeTeamId, LocalDate awayDate, String awayTeamId);
     List<Match> findByDateAfterAndHomeTeamIdOrDateAfterAndAwayTeamId(LocalDate homeDate, String homeTeamId, LocalDate awayDate, String awayTeamId);
     List<Match> findByStadiumContaining(String stadium); //Containing ce pretraziti i polovicno podudaranje npr ako kucam old moze da nadje old trafford
+    List<Match> findByCompetitionCompetitionIdOrderByDateAscTimeAsc(String competitionId);
+    List<Match> findByCompetitionCompetitionIdAndStatusOrderByDateAscTimeAsc(String competitionId, MatchStatus status);
 }
