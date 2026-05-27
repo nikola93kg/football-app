@@ -26,19 +26,33 @@ public class MatchEvent {
     private Match match;
 
     @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @JoinColumn(name = "player_id")
     private Player player;
 
     @ManyToOne
-    @JoinColumn(name = "team_id", nullable = false)
+    @JoinColumn(name = "assist_player_id")
+    private Player assistPlayer;
+
+    @ManyToOne
+    @JoinColumn(name = "related_player_id")
+    private Player relatedPlayer;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
     private Team team;
 
     @ManyToOne
-    @JoinColumn(name = "referee_id", nullable = false)
+    @JoinColumn(name = "referee_id")
     private Referee referee;
 
     @Enumerated(EnumType.STRING)
     private MatchEventType eventType;
 
     private LocalDateTime eventTime;
+    @Column(name = "match_minute")
+    private Integer minute;
+    private Integer additionalMinute;
+    private String note;
+    private String recordedBy;
+    private LocalDateTime recordedAt = LocalDateTime.now();
 }

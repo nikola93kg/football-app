@@ -5,8 +5,11 @@ INSERT INTO coach (id, name, age, nationality, trophies_won) VALUES
 INSERT INTO referee (id, name, age, nationality, total_red_cards_given, total_yellow_cards_given) VALUES
 ('ref-main', 'Mark Clattenburg', 49, 'England', 0, 0);
 
-INSERT INTO competition (competition_id, name, current_winner, prize_amount, description) VALUES
-('comp-ucl', 'UEFA Champions League', 'Manchester City', 'EUR 20000000', 'Top European club competition');
+INSERT INTO season (season_id, name, start_date, end_date, active) VALUES
+('season-winter-2026', 'Zimska liga 2026', '2026-01-10', '2026-03-20', true);
+
+INSERT INTO competition (competition_id, name, current_winner, prize_amount, description, season_id, status, type) VALUES
+('comp-ucl', 'Zimska liga - Seniori', NULL, 'EUR 20000000', 'Top European club competition', 'season-winter-2026', 'ACTIVE', 'LEAGUE');
 
 INSERT INTO team (id, name, logo, coach_id, default_formation) VALUES
 ('team-arsenal', 'Arsenal', 'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg', 'coach-arsenal', 'FORMATION_4_2_3_1'),
@@ -15,6 +18,10 @@ INSERT INTO team (id, name, logo, coach_id, default_formation) VALUES
 INSERT INTO team_competition_association (competition_id, id) VALUES
 ('comp-ucl', 'team-arsenal'),
 ('comp-ucl', 'team-barca');
+
+INSERT INTO competition_team (competition_team_id, competition_id, team_id, status, penalty_points, group_name, seed_number, active) VALUES
+('comp-team-arsenal', 'comp-ucl', 'team-arsenal', 'APPROVED', 0, 'A', 1, true),
+('comp-team-barca', 'comp-ucl', 'team-barca', 'APPROVED', 0, 'A', 2, true);
 
 INSERT INTO coach_team_engagement (id, team_id, coach_id, role, start_date, end_date, is_active) VALUES
 ('eng-arsenal', 'team-arsenal', 'coach-arsenal', 'HEAD_COACH', '2023-07-01', NULL, true),
@@ -35,9 +42,19 @@ INSERT INTO player_position (player_id, position) VALUES
 ('player-pedri', 'CENTRAL_MID'),
 ('player-pedri', 'ATTACKING_MID');
 
-INSERT INTO match (id, date, time, location, stadium, score, home_score, away_score, round_number, current_minute, status, competition_id, home_team_id, away_team_id, referee_id, home_team_formation, away_team_formation) VALUES
-('match-ars-bar', '2026-04-10', '20:45:00', 'London', 'Emirates Stadium', '2-1', 2, 1, 1, 90, 'FINISHED', 'comp-ucl', 'team-arsenal', 'team-barca', 'ref-main', 'FORMATION_4_2_3_1', 'FORMATION_4_3_3'),
-('match-bar-ars', '2026-04-24', '20:45:00', 'Barcelona', 'Camp Nou', NULL, NULL, NULL, 2, NULL, 'SCHEDULED', 'comp-ucl', 'team-barca', 'team-arsenal', 'ref-main', 'FORMATION_4_3_3', 'FORMATION_4_2_3_1');
+INSERT INTO player_registration (player_registration_id, competition_id, team_id, player_id, jersey_number, status, active, suspended_until, registered_at) VALUES
+('reg-saka', 'comp-ucl', 'team-arsenal', 'player-saka', 7, 'APPROVED', true, NULL, '2026-01-01 12:00:00'),
+('reg-rice', 'comp-ucl', 'team-arsenal', 'player-rice', 41, 'APPROVED', true, NULL, '2026-01-01 12:00:00'),
+('reg-lewa', 'comp-ucl', 'team-barca', 'player-lewa', 9, 'APPROVED', true, NULL, '2026-01-01 12:00:00'),
+('reg-pedri', 'comp-ucl', 'team-barca', 'player-pedri', 8, 'APPROVED', true, NULL, '2026-01-01 12:00:00');
+
+INSERT INTO competition_round (round_id, competition_id, round_number, name, start_date, end_date) VALUES
+('round-1', 'comp-ucl', 1, 'Kolo 1', '2026-04-10', '2026-04-10'),
+('round-2', 'comp-ucl', 2, 'Kolo 2', '2026-04-24', '2026-04-24');
+
+INSERT INTO match (id, date, time, location, stadium, score, home_score, away_score, round_number, current_minute, status, competition_id, round_id, home_team_id, away_team_id, referee_id, home_team_formation, away_team_formation) VALUES
+('match-ars-bar', '2026-04-10', '20:45:00', 'London', 'Emirates Stadium', '2-1', 2, 1, 1, 90, 'FINISHED', 'comp-ucl', 'round-1', 'team-arsenal', 'team-barca', 'ref-main', 'FORMATION_4_2_3_1', 'FORMATION_4_3_3'),
+('match-bar-ars', '2026-04-24', '20:45:00', 'Barcelona', 'Camp Nou', NULL, NULL, NULL, 2, NULL, 'SCHEDULED', 'comp-ucl', 'round-2', 'team-barca', 'team-arsenal', 'ref-main', 'FORMATION_4_3_3', 'FORMATION_4_2_3_1');
 
 INSERT INTO match_event (id, match_id, player_id, team_id, referee_id, event_type, event_time) VALUES
 ('event-goal-saka', 'match-ars-bar', 'player-saka', 'team-arsenal', 'ref-main', 'GOAL', '2026-04-10 21:05:00'),

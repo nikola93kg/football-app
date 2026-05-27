@@ -12,4 +12,5 @@ public interface MatchEventRepo extends JpaRepository<MatchEvent, String> {
     List<MatchEvent> findByRefereeId(String refereeId);
     List<MatchEvent> findByPlayerId(String playerId);
     List<MatchEvent> findByMatchId(String id);
+    List<MatchEvent> findByMatchCompetitionCompetitionId(String competitionId);
 }

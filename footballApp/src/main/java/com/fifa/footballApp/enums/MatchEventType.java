@@ -2,6 +2,7 @@ package com.fifa.footballApp.enums;
 
 public enum MatchEventType {
     GOAL,
+    OWN_GOAL,
     SHOT_ON_GOAL,
     SHOT_OUT_OF_GOAL,
     TOTAL_SHOTS,
@@ -11,8 +12,13 @@ public enum MatchEventType {
     OFFSIDE,
     MISSED_PENALTY,
     GOAL_FROM_PENALTY,
+    SECOND_YELLOW_CARD,
     YELLOW_CARD,
     RED_CARD,
     PLAYER_SUB_IN,
-    PLAYER_SUB_OUT
+    PLAYER_SUB_OUT,
+    MATCH_STARTED,
+    HALF_TIME,
+    SECOND_HALF_STARTED,
+    MATCH_FINISHED
 }

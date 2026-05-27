@@ -42,6 +42,10 @@ public class Match {
     private Competition competition;
 
     @ManyToOne
+    @JoinColumn(name = "round_id")
+    private Round round;
+
+    @ManyToOne
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
 

@@ -15,4 +15,5 @@ public interface MatchRepo extends JpaRepository<Match, String> {
     List<Match> findByStadiumContaining(String stadium); //Containing ce pretraziti i polovicno podudaranje npr ako kucam old moze da nadje old trafford
     List<Match> findByCompetitionCompetitionIdOrderByDateAscTimeAsc(String competitionId);
     List<Match> findByCompetitionCompetitionIdAndStatusOrderByDateAscTimeAsc(String competitionId, MatchStatus status);
+    List<Match> findByRoundIdOrderByDateAscTimeAsc(String roundId);
 }

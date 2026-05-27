@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,9 +24,16 @@ public class StandingRow {
     private int goalsAgainst;
     private int goalDifference;
     private int points;
+    private int penaltyPoints;
+    private List<String> form = new ArrayList<>();
 
     public StandingRow(Team team) {
         this.team = team;
+    }
+
+    public void applyPenaltyPoints(int penaltyPoints) {
+        this.penaltyPoints = penaltyPoints;
+        this.points -= penaltyPoints;
     }
 
     public void recordMatch(int scored, int conceded) {
@@ -35,11 +45,21 @@ public class StandingRow {
         if (scored > conceded) {
             wins++;
             points += 3;
+            addFormResult("W");
         } else if (scored == conceded) {
             draws++;
             points += 1;
+            addFormResult("D");
         } else {
             losses++;
+            addFormResult("L");
+        }
+    }
+
+    private void addFormResult(String result) {
+        form.add(result);
+        if (form.size() > 5) {
+            form.removeFirst();
         }
     }
 }

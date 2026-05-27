@@ -51,4 +51,29 @@ public class MatchController {
     public List<MatchEvent> getMatchEvents(@PathVariable String id) {
         return matchService.getMatchEvents(id);
     }
+
+    @PostMapping("/{id}/start")
+    public Match startMatch(@PathVariable String id) {
+        return matchService.startMatch(id);
+    }
+
+    @PostMapping("/{id}/half-time")
+    public Match setHalfTime(@PathVariable String id) {
+        return matchService.setHalfTime(id);
+    }
+
+    @PostMapping("/{id}/resume")
+    public Match resumeMatch(@PathVariable String id) {
+        return matchService.resumeMatch(id);
+    }
+
+    @PostMapping("/{id}/finish")
+    public Match finishMatch(@PathVariable String id) {
+        return matchService.finishMatch(id);
+    }
+
+    @PostMapping("/{id}/postpone")
+    public Match postponeMatch(@PathVariable String id) {
+        return matchService.postponeMatch(id);
+    }
 }

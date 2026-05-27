@@ -1,5 +1,6 @@
 package com.fifa.footballApp.service;
 
+import com.fifa.footballApp.enums.MatchStatus;
 import com.fifa.footballApp.model.Match;
 import com.fifa.footballApp.model.MatchEvent;
 import com.fifa.footballApp.repository.MatchEventRepo;
@@ -47,6 +48,7 @@ public class MatchService {
         match.setCurrentMinute(matchDetails.getCurrentMinute());
         match.setStatus(matchDetails.getStatus());
         match.setCompetition(matchDetails.getCompetition());
+        match.setRound(matchDetails.getRound());
         match.setHomeTeam(matchDetails.getHomeTeam());
         match.setAwayTeam(matchDetails.getAwayTeam());
         match.setReferee(matchDetails.getReferee());
@@ -77,6 +79,56 @@ public class MatchService {
             throw new IllegalArgumentException("Match id can't be null");
         }
         return matchEventRepo.findByMatchId(matchId);
+    }
+
+    public Match startMatch(String id) {
+        Match match = getMatchById(id);
+        match.setStatus(MatchStatus.LIVE);
+        match.setCurrentMinute(0);
+        if (match.getHomeScore() == null) {
+            match.setHomeScore(0);
+        }
+        if (match.getAwayScore() == null) {
+            match.setAwayScore(0);
+        }
+        updateScoreLabel(match);
+        return matchRepo.save(match);
+    }
+
+    public Match setHalfTime(String id) {
+        Match match = getMatchById(id);
+        match.setStatus(MatchStatus.HALF_TIME);
+        match.setCurrentMinute(45);
+        return matchRepo.save(match);
+    }
+
+    public Match resumeMatch(String id) {
+        Match match = getMatchById(id);
+        match.setStatus(MatchStatus.LIVE);
+        if (match.getCurrentMinute() == null || match.getCurrentMinute() < 45) {
+            match.setCurrentMinute(45);
+        }
+        return matchRepo.save(match);
+    }
+
+    public Match finishMatch(String id) {
+        Match match = getMatchById(id);
+        match.setStatus(MatchStatus.FINISHED);
+        match.setCurrentMinute(90);
+        updateScoreLabel(match);
+        return matchRepo.save(match);
+    }
+
+    public Match postponeMatch(String id) {
+        Match match = getMatchById(id);
+        match.setStatus(MatchStatus.POSTPONED);
+        return matchRepo.save(match);
+    }
+
+    private void updateScoreLabel(Match match) {
+        if (match.getHomeScore() != null && match.getAwayScore() != null) {
+            match.setScore(match.getHomeScore() + "-" + match.getAwayScore());
+        }
     }
 
 }
