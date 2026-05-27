@@ -59,7 +59,7 @@ public class StandingRow {
     private void addFormResult(String result) {
         form.add(result);
         if (form.size() > 5) {
-            form.removeFirst();
+            form.remove(0);
         }
     }
 }

@@ -77,23 +77,23 @@ class FotballAppApplicationTests {
 		List<CompetitionTeamStats> teamStats = competitionService.getCompetitionTeamStats("comp-ucl");
 
 		Assertions.assertEquals(2, topScorers.size());
-		Assertions.assertEquals("Bukayo Saka", topScorers.getFirst().getPlayer().getName());
-		Assertions.assertEquals(1, topScorers.getFirst().getGoals());
-		Assertions.assertEquals(1, topScorers.getFirst().getAppearances());
+		Assertions.assertEquals("Bukayo Saka", topScorers.get(0).getPlayer().getName());
+		Assertions.assertEquals(1, topScorers.get(0).getGoals());
+		Assertions.assertEquals(1, topScorers.get(0).getAppearances());
 
 		Assertions.assertEquals(1, topAssists.size());
-		Assertions.assertEquals("Declan Rice", topAssists.getFirst().getPlayer().getName());
-		Assertions.assertEquals(1, topAssists.getFirst().getAssists());
+		Assertions.assertEquals("Declan Rice", topAssists.get(0).getPlayer().getName());
+		Assertions.assertEquals(1, topAssists.get(0).getAssists());
 
 		Assertions.assertEquals(1, discipline.size());
-		Assertions.assertEquals("Pedri", discipline.getFirst().getPlayer().getName());
-		Assertions.assertEquals(1, discipline.getFirst().getYellowCards());
+		Assertions.assertEquals("Pedri", discipline.get(0).getPlayer().getName());
+		Assertions.assertEquals(1, discipline.get(0).getYellowCards());
 
 		Assertions.assertEquals(2, teamStats.size());
-		Assertions.assertEquals("Arsenal", teamStats.getFirst().getTeam().getName());
-		Assertions.assertEquals(3, teamStats.getFirst().getPoints());
-		Assertions.assertEquals(2, teamStats.getFirst().getGoalsFor());
-		Assertions.assertEquals(List.of("W"), teamStats.getFirst().getForm());
+		Assertions.assertEquals("Arsenal", teamStats.get(0).getTeam().getName());
+		Assertions.assertEquals(3, teamStats.get(0).getPoints());
+		Assertions.assertEquals(2, teamStats.get(0).getGoalsFor());
+		Assertions.assertEquals(List.of("W"), teamStats.get(0).getForm());
 		Assertions.assertEquals(1, teamStats.get(1).getYellowCards());
 	}
 
@@ -105,9 +105,9 @@ class FotballAppApplicationTests {
 		List<PlayerRegistration> registrations = competitionService.getCompetitionPlayerRegistrations("comp-ucl", null);
 
 		Assertions.assertEquals(1, activeSeasons.size());
-		Assertions.assertEquals("Zimska liga 2026", activeSeasons.getFirst().getName());
+		Assertions.assertEquals("Zimska liga 2026", activeSeasons.get(0).getName());
 		Assertions.assertEquals(2, rounds.size());
-		Assertions.assertEquals("Kolo 1", rounds.getFirst().getName());
+		Assertions.assertEquals("Kolo 1", rounds.get(0).getName());
 		Assertions.assertEquals(2, teams.size());
 		Assertions.assertEquals(4, registrations.size());
 	}
